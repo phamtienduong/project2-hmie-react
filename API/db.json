@@ -1,0 +1,252 @@
+{
+  "users": [
+    {
+      "userName": "Duongu",
+      "email": "duongu@gmail.com",
+      "phone": "0981011321",
+      "password": "Duong123",
+      "cart": [],
+      "id": 1
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Váy mini kẻ",
+      "price": 790000,
+      "image": "https://product.hstatic.net/200000549029/product/3_e9a058812a79449da82f6ff6bbbeb690_master.jpg",
+      "quantity": 50,
+      "category_id": 5,
+      "description": "Trống"
+    },
+    {
+      "id": 2,
+      "name": "Áo sơ mi cổ bẻ phối bèo",
+      "price": 599000,
+      "image": "https://product.hstatic.net/200000549029/product/1_6b3ab0b4c4464001b952753be9d00b53_master.jpg",
+      "quantity": 50,
+      "category_id": 1,
+      "description": "Trống"
+    },
+    {
+      "id": 3,
+      "name": "Chân váy nhung xếp li",
+      "price": 499000,
+      "image": "https://product.hstatic.net/200000549029/product/2_b0f776c95d4b4b388f80c9ae1165894c_master.jpg",
+      "quantity": 50,
+      "category_id": 3,
+      "description": "Trống"
+    },
+    {
+      "id": 4,
+      "name": "Quần ống rộng",
+      "price": 649000,
+      "image": "https://product.hstatic.net/200000549029/product/3_91a7b0238b22442e87e47fb2a210d03c_master.jpg",
+      "quantity": 50,
+      "category_id": 2,
+      "description": "Trống"
+    },
+    {
+      "id": 5,
+      "name": "Áo croptop tay bồng",
+      "price": 499000,
+      "image": "https://product.hstatic.net/200000549029/product/2_f00b78881b824d768209ce819250246a_master.jpg",
+      "quantity": 50,
+      "category_id": 1,
+      "description": "Trống"
+    },
+    {
+      "id": 6,
+      "name": "Váy mini dài tay cổ đáp hoa",
+      "price": 790000,
+      "image": "https://product.hstatic.net/200000549029/product/2_c700f15218e34964937177e85f4142e3_master.jpg",
+      "quantity": 50,
+      "category_id": 5,
+      "description": "Trống"
+    },
+    {
+      "id": 7,
+      "name": "Blazer dáng suông",
+      "price": 799000,
+      "image": "https://product.hstatic.net/200000549029/product/h072bf1v132263_p799k_h073bf1a332263_p299k_h017bf2q032263_p699k__6__36e378a399974c219e8b19d250d3c400_master.jpg",
+      "quantity": 50,
+      "category_id": 5,
+      "description": "Trống"
+    },
+    {
+      "id": 8,
+      "name": "Váy mini 2 dây xếp li",
+      "price": 599000,
+      "image": "https://product.hstatic.net/200000549029/product/2_146414880d404834a92773f7c4890223_master.jpg",
+      "quantity": 50,
+      "category_id": 5,
+      "description": "Trống"
+    },
+    {
+      "id": 9,
+      "name": "Váy mini kẻ",
+      "price": 790000,
+      "image": "https://product.hstatic.net/200000549029/product/3_e9a058812a79449da82f6ff6bbbeb690_master.jpg",
+      "quantity": 50,
+      "category_id": 5,
+      "description": "Trống"
+    },
+    {
+      "id": 10,
+      "name": "Váy midi hoa nhí",
+      "price": 790000,
+      "image": "https://product.hstatic.net/200000549029/product/3_6908778468ff485cadc9e7eaec25deff_master.jpg",
+      "quantity": 50,
+      "category_id": 5,
+      "description": "Trống"
+    },
+    {
+      "id": 11,
+      "name": "Váy midi đính nơ",
+      "price": 799000,
+      "image": "https://product.hstatic.net/200000549029/product/3_94ec8968bcf241c79d59259d6edc0fed_master.jpg",
+      "quantity": 50,
+      "category_id": 5,
+      "description": "Trống"
+    },
+    {
+      "id": 12,
+      "name": "Set áo croptop và chân váy midi ren",
+      "price": 349500,
+      "image": "https://product.hstatic.net/200000549029/product/2_51501b8fb35a4eba82d8d59c83689a33_master.jpg",
+      "quantity": 50,
+      "category_id": 4,
+      "description": "Trống"
+    },
+    {
+      "id": 13,
+      "name": "Set áo croptop và chân váy mini kẻ",
+      "price": 399000,
+      "image": "https://product.hstatic.net/200000549029/product/1_ae6402c6c02947debf7332025e3906f5_master.jpg",
+      "quantity": 50,
+      "category_id": 4,
+      "description": "Trống"
+    },
+    {
+      "id": 14,
+      "name": "Áo bơi mút mỏng cột dây họa tiết",
+      "price": 699000,
+      "image": "https://product.hstatic.net/200000417501/product/20698f1662ddbe83e7cc19_6fe17bdbf8494d14952ea9a33cc266ae_master.jpg",
+      "quantity": 50,
+      "category_id": 1,
+      "description": "Trống"
+    },
+    {
+      "id": 15,
+      "name": "Bikini 2 mảnh tam giác quần cột dây Nâu Tây",
+      "price": 350000,
+      "image": "https://product.hstatic.net/200000417501/product/z4476559830609_db0f7b797410f1a6ca16ca9a60266fb2_a3714c7c0e7848acb27b75b07a71daec_master.jpg",
+      "quantity": 50,
+      "category_id": 1,
+      "description": "Trống"
+    },
+    {
+      "id": 16,
+      "name": "Bikini 2 mảnh áo mút hai dây, quần tam giác kèm váy",
+      "price": 699000,
+      "image": "https://product.hstatic.net/200000417501/product/0f1f766d0f7bd3258a6a22_e711f1740b21436993993843b377ec60_master.jpg",
+      "quantity": 50,
+      "category_id": 1,
+      "description": "Trống"
+    },
+    {
+      "id": 17,
+      "name": "Bikini siêu phẩm",
+      "price": 699000,
+      "image": "https://firebasestorage.googleapis.com/v0/b/netflixsource-75bc5.appspot.com/o/images%2F2b526e9073d2da8c83c3.jpg?alt=media&token=20a1bcc7-5132-4daf-a427-611d6971b1da",
+      "quantity": 50,
+      "category_id": 1,
+      "description": "Trống"
+    },
+    {
+      "id": 18,
+      "name": "Bikini Jun Vũ",
+      "price": 699000,
+      "image": "https://firebasestorage.googleapis.com/v0/b/netflixsource-75bc5.appspot.com/o/images%2Ff69761547c16d5488c07.jpg?alt=media&token=9d104ba1-dcd9-4b69-95fe-1178bd8002f5",
+      "quantity": 50,
+      "category_id": 1,
+      "description": "Trống"
+    },
+    {
+      "id": 19,
+      "name": "Bikini 2 dây màu xanh lá chuối",
+      "price": 699000,
+      "image": "https://firebasestorage.googleapis.com/v0/b/netflixsource-75bc5.appspot.com/o/images%2Fjun1.jpg?alt=media&token=fa242510-a4b7-48f3-8b3e-5c25e063644a",
+      "quantity": 50,
+      "category_id": 1,
+      "description": "Trống"
+    },
+    {
+      "id": 20,
+      "name": "Bikini màu xanh nước biển",
+      "price": 699000,
+      "image": "https://firebasestorage.googleapis.com/v0/b/netflixsource-75bc5.appspot.com/o/images%2Fjun2.jpg?alt=media&token=0c963523-9770-468a-af86-d1590adce5e1",
+      "quantity": 50,
+      "category_id": 1,
+      "description": "Trống"
+    },
+    {
+      "id": 21,
+      "name": "Bikini vàng 2 mảnh",
+      "price": 699000,
+      "image": "https://firebasestorage.googleapis.com/v0/b/netflixsource-75bc5.appspot.com/o/images%2Fjun3.jpg?alt=media&token=79d8c332-51fe-4668-aa99-6b7be4d53c67",
+      "quantity": 50,
+      "category_id": 1,
+      "description": "Trống"
+    },
+    {
+      "id": 22,
+      "name": "Đầm đuôi cá trễ vai trắng phối tapta nơ - Hồng - S",
+      "price": 699000,
+      "image": "https://pos.nvncdn.net/4ef0bf-108661/ps/20221125_5NVJAJCsNrGY2zH7ERyUGmJ6.jpg",
+      "quantity": 50,
+      "category_id": 1,
+      "description": "Trống"
+    },
+    {
+      "id": 23,
+      "name": "Áo khoác đen tay dơi",
+      "price": 699000,
+      "image": "https://product.hstatic.net/200000549029/product/h178bf1j042201_p699k_h042bf2q232201_p499k__2__159fd0223db844ad8ff690c746573fed_master.jpg",
+      "quantity": 50,
+      "category_id": 1,
+      "description": "Trống"
+    },
+    {
+      "id": 24,
+      "name": "Áo khoác đen tay dơi",
+      "price": 699000,
+      "image": "https://product.hstatic.net/200000549029/product/h178bf1j042201_p699k_h042bf2q232201_p499k__2__159fd0223db844ad8ff690c746573fed_master.jpg",
+      "quantity": 50,
+      "category_id": 1,
+      "description": "Trống"
+    }
+  ],
+  "category": [
+    {
+      "id": 1,
+      "category_name": "Áo"
+    },
+    {
+      "id": 2,
+      "category_name": "Quần"
+    },
+    {
+      "id": 3,
+      "category_name": "Chân váy"
+    },
+    {
+      "id": 4,
+      "category_name": "Set bộ"
+    },
+    {
+      "id": 5,
+      "category_name": "Váy liền & Jumpsuit"
+    }
+  ]
+}
