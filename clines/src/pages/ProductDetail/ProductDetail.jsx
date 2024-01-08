@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import './ProductDetail.css'
-import Slider from "react-slick";
 import { useDispatch, useSelector } from 'react-redux';
 import { action } from '../../action/action';
-
+import { message } from 'antd';
+import { useNavigate } from "react-router-dom"
 export default function ProductDetail() {
+    // lấy id của product cần vẽ
     const idProductDetail = localStorage.getItem("idProductDetail")
+    // lưu thông tin sản phẩm
     const [productDetail, setProductDetail] = useState({})
-    const data = useSelector(store=>store.reducer)
+
+    const data = useSelector(store => store.reducer)
     const dispatch = useDispatch()
-    // Gọi Api về
+    const navigate = useNavigate()
     const settings = {
         dots: true,
         infinite: true,
@@ -18,36 +21,52 @@ export default function ProductDetail() {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 1000,
-      };
-    
+    };
+
 
     useEffect(() => {
+        // lấy thông tin sản phẩm cần vẽ
         fetch(`http://localhost:7500/products/${idProductDetail}`)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 setProductDetail(data);
             })
     }, [])
-    const handleAddToCart=(id)=>{
+
+    // thêm sản phẩm vào giỏ hàng
+    const handleAddToCart = (id) => {
+        // lấy thông tin người mua
         const userLogin = JSON.parse(localStorage.getItem("currentUser")) || {}
+        // lấy ra giỏ hàng của người đó
         const cart = userLogin.cart
+        if (!userLogin.id) {
+            message.error("Bạn chưu đăng nhập")
+            setTimeout(()=>{
+                navigate("/login");
+            },2000)
+            return
+        }
+
+        // tìm xem có sp muốn thêm chưa
         const index = cart.findIndex(item => item.idProduct == id)
+        // chưa có thì thêm mới
         if (index == -1) {
             cart.push({
                 idProduct: id,
                 quantity: 1
             })
         } else {
+            // có rồi thì tăng số lượng
             cart[index].quantity++
         }
+        // cập nhật lại thông tin cho local
         userLogin.cart = cart
-        console.log("==> userLogin: ",userLogin);
         localStorage.setItem("currentUser", JSON.stringify(userLogin))
         dispatch(action("setUserLogin"))
     }
 
-    
+
 
     return (
         <div>
@@ -58,7 +77,7 @@ export default function ProductDetail() {
                             <div className="img_sale_1">
                                 <span>SALE 50%</span>
                             </div>
-                            <img src="../../../src/assets/img/anh_sale.webp" alt />
+                            <img src="../../../src/assets/img/anh_sale.webp" alt="img" />
                         </div>
                         <img id="img_product" src={productDetail.image} alt="img" ></img>
                     </div>
@@ -73,7 +92,7 @@ export default function ProductDetail() {
                             </div>
                         </div>
                         <div className="wrap-addcart">
-                            <button onClick={()=> handleAddToCart(productDetail?.id)}  className="btn-cart w-[479.33px] h-[56px]">Thêm vào giỏ hàng</button>
+                            <button onClick={() => handleAddToCart(productDetail?.id)} className="btn-cart w-[479.33px] h-[56px]">Thêm vào giỏ hàng</button>
                         </div>
                         <div className="product-description">
                             <p><strong>Chất liệu:&nbsp;</strong>vải tweed</p><br />
@@ -84,16 +103,22 @@ export default function ProductDetail() {
                     </div>
                 </div>
                 {/* Swiper */}
-                <div>
-                <Slider {...settings}>
-                    <div>
-                        <h3><img src=''></img></h3>
-                    </div>
-                    <div>
-                        <h3><img src=''></img></h3>
-                    </div>
-                </Slider>
-            </div>
+                {/* <div className='truncate'>
+                    <Slider {...settings}>
+                        <div >
+                            <h3 className='flex justify-center'>
+                                <img className='w-[295px] h-[400px] mr-1' src='../../../src/assets/img/ao/ao-ren-tay-bong-0.webp'></img>
+                                <img className='w-[295px] h-[400px] mr-1' src='../../../src/assets/img/ao/ao-ren-tay-bong-0.webp'></img>
+                                <img className='w-[295px] h-[400px] mr-1' src='../../../src/assets/img/ao/ao-ren-tay-bong-0.webp'></img>
+                                <img className='w-[295px] h-[400px] mr-1' src='../../../src/assets/img/ao/ao-ren-tay-bong-0.webp'></img>
+                                <img className='w-[295px] h-[400px] mr-1' src='../../../src/assets/img/ao/ao-ren-tay-bong-0.webp'></img>
+                            </h3>
+                        </div>
+                        <div>
+                            <h3></h3>
+                        </div>
+                    </Slider>
+                </div> */}
             </main>
         </div>
     )

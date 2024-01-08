@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from "axios"
 import { notification } from "antd";
 import api from "../../service/apis/api.users.js"
-
+import bcrypt from "bcryptjs";
 export default function Register() {
     // ****************************************
     const navigate = useNavigate();
@@ -46,14 +46,13 @@ export default function Register() {
             errPass: "",
             errConfirm: ""
         }
-
         const regexName = /^.{4,}$/;
         const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         const regexPhone = /^(0|\+84)\d{9,10}$/;
         const regexPass = /^(?=.*[A-Za-z])(?=.*\d).{6,}$/;
-        api.checkRegister(nameInput.email).then((res)=>{
-            if (res.data.length!=0) {
- 
+        api.checkRegister(nameInput.email).then(async(res) => {
+            if (res.data.length != 0) {
+
                 notification.error({
                     message: "email đã tồn tại",
                     style: {
@@ -61,82 +60,66 @@ export default function Register() {
                     },
                 });
             }
-        
-        let check = true
+            let check = true
 
-        if (!regexName.test(nameInput.userName)) {
-            err.errName = "Tên có 6 ký tự trở lên"
-            check = false
-        }
-
-        if (!regexEmail.test(nameInput.email)) {
-            err.errEmail = "Chưa đúng định dạng email"
-            check = false
-        } else {
-            if (users.find((user) => user.email == nameInput.email)) {
-                err.errEmail = "Email đã tồn tại"
+            if (!regexName.test(nameInput.userName)) {
+                err.errName = "Tên có 6 ký tự trở lên"
                 check = false
             }
-        }
 
-        if (!regexPhone.test(nameInput.phone)) {
-            err.errPhone = "Chưa đúng định dạng Phone VN"
-            check = false
-        }
-        
-        if (!regexPass.test(nameInput.password)) {
-            err.errPass = "Mật khẩu ít nhất 6 ký tự chứa cả chữ cái và số"
-            check = false
-        }
+            if (!regexEmail.test(nameInput.email)) {
+                err.errEmail = "Chưa đúng định dạng email"
+                check = false
+            } else {
+                if (users.find((user) => user.email == nameInput.email)) {
+                    err.errEmail = "Email đã tồn tại"
+                    check = false
+                }
+            }
 
-        if (!(nameInput.password == nameInput.confirmPassword)) {
-            err.errConfirm = "Nhập lại mật khẩu cho đúng"
-            check = false
-        }
-   
-    
-        if (!check) {
-            setErrorInput(err)
-            return
-        } else {
-            const {confirmPassword, ...data} = nameInput
-            api.register({
-                ...data,
-                cart:[]
-            })
-            notification.success({
-                message: "Đăng ký thành công",
-                style: {
-                    top: 100,
-                },
-            });
-            // setErrorInput({
-            //     errName: "",
-            //     errEmail: "",
-            //     errPass: "",
-            //     errConfirm: ""
-            // })
-            navigate("/login");
-            return
-        }
-         })
-        // if (check) {
-        //     notification.error({
-        //         message: "Email đã được đăng ký",
-        //         style: {
-        //             top: 95,
-        //         },
-        //     });
-        // } else {
-        //     
-        //     setNameInput({
-        //         userName: '',
-        //         email: '',
-        //         password: '',
-        //         confirmPassword: ''
-        //     });
-        //     
-        // }
+            if (!regexPhone.test(nameInput.phone)) {
+                err.errPhone = "Chưa đúng định dạng Phone VN"
+                check = false
+            }
+
+            if (!regexPass.test(nameInput.password)) {
+                err.errPass = "Mật khẩu ít nhất 6 ký tự chứa cả chữ cái và số"
+                check = false
+            }
+
+            if (!(nameInput.password == nameInput.confirmPassword)) {
+                err.errConfirm = "Nhập lại mật khẩu cho đúng"
+                check = false
+            }
+
+
+            if (!check) {
+                setErrorInput(err)
+                return
+            } else {
+                const hashedPassword = await bcrypt.hash(nameInput.password, 10); // Mã hóa mật khẩu
+                const newUser = {
+                    ...nameInput,
+                    password: hashedPassword
+                }
+                delete newUser.confirmPassword;
+                api.register({
+                    ...newUser,
+                    cart: [],
+                    active: true
+                })
+                notification.success({
+                    message: "Đăng ký thành công",
+                    style: {
+                        top: 100,
+                    },
+                });
+
+                navigate("/login");
+                return
+            }
+        })
+
     }
 
     return (

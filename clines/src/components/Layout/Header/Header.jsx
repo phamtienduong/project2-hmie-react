@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import "./Header.css";
 import {
     ArrowPathIcon,
@@ -24,6 +24,7 @@ import {
 } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { action } from "../../../action/action";
+import axios from "axios"
 
 const products = [
     {
@@ -66,23 +67,44 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-export default function Header({ onSearch }) {
+export default function Header({ isLogin, setIsLogin, setIsLoad }) {
     
     const userLogin = useSelector((state) => state.reducer.userLogin)
+    const [userLoginLocal, setUserLoginLocal] = useState(JSON.parse(localStorage.getItem("currentUser")) || {})
     
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+    const [category, setCategory] = useState([])
 
-    // 
+    const [dataProduct, setDataProduct] = useState([])
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
+
+    const handleClickCategory = (id) => {
+        localStorage.setItem("categoryId", JSON.stringify(id))
+        setIsLoad(prev => !prev)
+        navigate("category")
+    }
+
     const handleLogout = () => {
         localStorage.setItem("currentUser", JSON.stringify(""));
-        // setUserLogin({})
         dispatch(action("setUserLogin"))
+        setUserLoginLocal({})
+        setIsLogin(false)
         navigate("/login")
     }
+
+    const getCategory = async () => {
+        const result = await axios.get("http://localhost:7500/category")
+        setCategory(result.data)
+    }
+
+    useEffect(() => {
+        dispatch(action("setUserLogin"))
+        setUserLoginLocal(JSON.parse(localStorage.getItem("currentUser")))
+        getCategory()
+    }, [isLogin])
     return (
         <header className="bg-white">
             <nav
@@ -133,31 +155,31 @@ export default function Header({ onSearch }) {
                         >
                             <Popover.Panel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
                                 <div className="p-4">
-                                    {products.map((item) => (
+                                    {category.map((item) => (
                                         <div
-                                            key={item.name}
+                                            key={item.id}
                                             className="group relative flex items-center gap-x-6 rounded-lg p-4 text-lg leading-6 hover:bg-gray-50"
                                         >
-                                            <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                                            {/* <div className="flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
                                                 <item.icon
                                                     className="h-6 w-6 text-gray-600 group-hover:text-indigo-600"
                                                     aria-hidden="true"
                                                 />
-                                            </div>
-                                            <div className="flex-auto">
+                                            </div> */}
+                                            <div className="flex-auto" onClick={() => handleClickCategory(item.id)}>
                                                 <a
-                                                    href={item.href}
+                                                    href={item?.href}
                                                     className="block font-semibold text-gray-900"
                                                 >
-                                                    {item.name}
+                                                    {item.category_name}
                                                     <span className="absolute inset-0" />
                                                 </a>
-                                                <p className="mt-1 text-gray-600">{item.description}</p>
+                                                <p className="mt-1 text-gray-600">{item?.description}</p>
                                             </div>
                                         </div>
                                     ))}
                                 </div>
-                                <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
+                                {/* <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
                                     {callsToAction.map((item) => (
                                         <a
                                             key={item.name}
@@ -171,7 +193,7 @@ export default function Header({ onSearch }) {
                                             {item.name}
                                         </a>
                                     ))}
-                                </div>
+                                </div> */}
                             </Popover.Panel>
                         </Transition>
                     </Popover>
@@ -185,9 +207,9 @@ export default function Header({ onSearch }) {
                     <a href="#" className="text-lg font-semibold leading-6 text-gray-900">
                         Sản phẩm mới
                     </a>
-                    <a href="#" className="text-lg font-semibold leading-6 text-gray-900">
+                    <Link to="/bill" className="text-lg font-semibold leading-6 text-gray-900">
                         Đơn hàng
-                    </a>
+                    </Link>
                 </Popover.Group>
 
                 <div className="hidden lg:flex lg:flex-1 lg:justify-end">
@@ -209,19 +231,21 @@ export default function Header({ onSearch }) {
                         <Menu as="div" className="relative ml-3">
                             <div>
                                 {
-                                    userLogin && userLogin.id ?
+                                    userLoginLocal && userLoginLocal.id ?
                                         <Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                             <span className="absolute -inset-1.5" />
                                             <span className="sr-only">Open user menu</span>
 
-                                            <img
+                                            {/* <img
                                                 className="h-8 w-8 rounded-full"
                                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                                 alt=""
-                                            />
+                                            /> */}
+                                            <span style={{backgroundColor: "white"}}>{userLoginLocal.userName}</span>
 
-                                        </Menu.Button> :
-                                        <span style={{ backgroundColor: "white" }} onClick={() => navigate("/Login")}>
+                                        </Menu.Button> 
+                                        :
+                                        <span style={{ backgroundColor: "white" }} onClick={() => handleLogout()}>
                                             <i className="fa-solid fa-user"></i>
                                         </span>
                                 }

@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import './Login.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { notification } from 'antd'
+import { message, notification } from 'antd'
 import apiUsers from '../../service/apis/api.users'
 import { useDispatch } from 'react-redux'
 import { action } from '../../action/action'
-export default function Login() {
+import bcrypt from "bcryptjs";
+export default function Login({setIsLogin}) {
   const [nameInput, setNameInput] = useState({
     userName: "",
     password: ""
@@ -18,15 +19,28 @@ export default function Login() {
   }
   const handleLogin = (e) => {
     e.preventDefault()
+
+    if (!nameInput.userName || !nameInput.password) {
+      notification.error({
+        message: "Thông tin không được để trống",
+      });
+      return;
+    }
+
     apiUsers.checkLogin(nameInput.userName,nameInput.password)
       .then((res) => {
-        if (res.data.length!=0) {
-          // console.log(res.data);
+        if (res.status) {
+          console.log(res);
+          if(!res.user.active) {
+            message.error("Tài khoản đã bị khoá")
+            return
+          }
           notification.success({
             message: "Đăng nhập thành công",
           });
-          localStorage.setItem("currentUser", JSON.stringify(res.data[0]))
+          localStorage.setItem("currentUser", JSON.stringify(res.user))
           dispatch(action("setUserLogin"))
+          setIsLogin(true)
           navigate("/");
         } else {
           notification.error({

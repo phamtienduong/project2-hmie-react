@@ -15,7 +15,7 @@ export default function Main() {
   return (
     <main>
         <div>
-            <div>
+            <div className='truncate'>
                 <Slider {...settings}>
                     <div>
                         <h3><img src='/src/assets/img/index-banner/bosuutap1_slider_image_1.webp'></img></h3>

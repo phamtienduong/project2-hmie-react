@@ -20,11 +20,6 @@ export const reducer = (state=initialSate,action)=>{
                 ...state,
                 userLogin
             }
-        case "search":
-            return {
-                ...state,
-                search: action.payload
-            }
         default:
             return state;
     }
